@@ -8,7 +8,7 @@ use Kata\Player;
  * Class PlayerTest
  * @package Kata
  */
-class PlayerTest
+class PlayerTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $player;

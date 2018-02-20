@@ -8,20 +8,33 @@ use Kata\Match;
  * Class MatchTest
  * @package Kata
  */
-class MatchTest
+class MatchTest extends \PHPUnit_Framework_TestCase
 {
-    protected $playerA;
-    protected $playerB;
+    protected $match;
+
+    public function setUp()
+    {
+        $this->match = new Match;
+    }
 
     public function testPlayerHasMatchball()
     {
-        $this->assertEquals(true, $this->playerA->hasMatchball());
+        $this->assertEquals(true, $this->match->checkMatchball());
     }
 
     public function testPlayerHasAdvantageDuringDeuce()
     {
-        $this->assertEquals(false, $this->playerA->hasMatchball());
-        $this->assertEquals(false, $this->playerB->hasMatchball());
-        $this->assertEquals(true, $this->playerA->hasAdvantage());
+        $this->assertEquals(false, $this->match->checkMatchball());
+        $this->assertEquals(true, $this->match->checkAdvantage());
+    }
+
+    public function testMatchIsOver()
+    {
+        $this->assertEquals(true, $this->match->hasEnded());
+    }
+
+    public function testPlayerHasWon()
+    {
+        $this->assertEquals('A', $this->match->checkWinner());
     }
 }
