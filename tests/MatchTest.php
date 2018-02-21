@@ -24,14 +24,23 @@ class MatchTest extends \PHPUnit_Framework_TestCase
 
     public function testPlayerHasMatchball()
     {
-        $this->match->setMatchball($this->player1);
+        $this->match->play($this->player1, $this->player2);
+        $this->match->play($this->player1, $this->player2);
+        $this->match->play($this->player1, $this->player2);
+        $this->match->play($this->player1, $this->player2);
+        
         $this->assertEquals(true, $this->match->checkMatchball($this->player1));
     }
 
     public function testPlayerHasAdvantageDuringDeuce()
     {
-        $this->match->setAdvantage($this->player1);
-        $this->assertEquals(true, $this->match->checkAdvantage($this->player1));
+        $this->match->play($this->player1, $this->player2);
+        $this->match->play($this->player2, $this->player1);
+        $this->match->play($this->player1, $this->player2);
+        $this->match->play($this->player2, $this->player1);
+        $this->match->play($this->player1, $this->player2);
+        $this->match->play($this->player2, $this->player1);
+        $this->assertEquals(true, $this->match->checkAdvantage($this->player2));
     }
 
     /*public function testMatchIsOver()

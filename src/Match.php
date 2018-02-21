@@ -23,9 +23,20 @@ class Match
 
     public function play(Player $winner, Player $loser)
     {
-        if($winner->getCurrentScore() < 3 && $loser->getCurrentScore() < 3)
+        if($this->hasEnded() === false)
         {
             $winner->score();
+            $this->setAdvantage($winner);
+
+            if($winner->getCurrentScore() - $loser->getCurrentScore() >= 1)
+            {
+                $this->setMatchball($winner);
+            }
+
+            if($winner->getCurrentScore() > 3 && ($winner->getCurrentScore() - $loser->getCurrentScore() >= 1))
+            {
+                $this->endMatch();
+            }
         }
     }
 
@@ -42,6 +53,11 @@ class Match
     public function hasEnded() : bool
     {
         return $this->matchFinished;
+    }
+
+    private function endMatch()
+    {
+        $this->matchFinished = true;
     }
 
     /*public function checkWinner() : Player
