@@ -24,4 +24,5 @@ class Score
     {
         return $this->current;
     }
+
 }

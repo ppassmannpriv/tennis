@@ -10,12 +10,16 @@ class Player
 {
     protected $score;
     protected $name;
+    protected $matchball;
+    protected $advantage;
 
     public function __construct(
         string $name
     )
     {
         $this->name = $name;
+        $this->matchball = false;
+        $this->advantage = false;
         $this->score = new Score;
     }
 
